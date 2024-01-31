@@ -7,5 +7,20 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/Sugandhasingh77/java-app.git'
             }
         }
+        stage("Unit Test") {
+            steps{
+                sh 'mvn test'
+            }
+        }
+        stage("Integration Test") {
+            steps{
+                sh 'mvn veify -DskipUnitTests'
+            }
+        }
+        stage("MAVEN BUILD") {
+            steps{
+                sh 'mvn clean install'
+            }
+        }
     }
 }
